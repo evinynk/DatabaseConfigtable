@@ -14,7 +14,7 @@ import java.sql.Statement;
 
 public class SqliteDeneme {
      private Connection connect() {
-        // SQLite connection string
+       
         String url = "jdbc:sqlite:C://sqlite/config.db"; //veritabanı dosya yolu
         Connection conn = null; //bağlantı nesnemiz
         try {
@@ -33,7 +33,6 @@ public class SqliteDeneme {
              ResultSet rs    = stmt.executeQuery(sql)){ //executeQuery() --> sorgulama için kullanılır(select sorgusu için)
                                                         //sorgu sonuçları ResultSet arabirimi sayesinde elde edilir.
             
-            // loop through the result set
             while (rs.next()) {
                 System.out.println("key: " + rs.getString("key")); 
                 System.out.println("value: " + rs.getString("value"));
@@ -59,21 +58,20 @@ public class SqliteDeneme {
          String sql = "DELETE from configtable WHERE key = ?";
          try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            // set the corresponding param
             pstmt.setString(1, key);
-            // execute the delete statement
             pstmt.executeUpdate();
  
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
      }
+     
     public static void main(String[] args) {     
         SqliteDeneme app = new SqliteDeneme();
-        app.insert("DENEME", "2");
+        //app.insert("DENEME", "2");
         //app.delete("DENEME");
+        app.insert("DENEME2", 3);
         app.selectAll();  
-          
+       
     }
 }
-
